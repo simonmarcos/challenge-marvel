@@ -4,6 +4,7 @@ import com.test.challenge.challenge.service.marvel.AuthenticationMarvelService;
 import com.test.challenge.challenge.service.marvel.CharacterMarvelService;
 import com.test.challenge.challenge.service.marvel.model.CharacterMarvel;
 import com.test.challenge.challenge.service.marvel.model.GenericMarvelResponse;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -27,6 +28,24 @@ public class CharacterMarvelServiceImpl implements CharacterMarvelService {
     }
 
     @Override
+    public List<CharacterMarvel> findAll(Pageable pageable) {
+        List<CharacterMarvel> characterResponseList = null;
+
+        try {
+            Map<String, Object> paramsForRequest = authenticationMarvelService.getParamsUrlWithPagination(pageable);
+            String BASE_URL = authenticationMarvelService.getBaseUrlWithPagination(PATH_NAME);
+
+            ResponseEntity<GenericMarvelResponse> responseEntity = restTemplate.getForEntity(BASE_URL, GenericMarvelResponse.class, paramsForRequest);
+            characterResponseList = Objects.requireNonNull(responseEntity.getBody()).getDataMarvelResponse().getResults();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        return characterResponseList;
+    }
+
+    @Override
     public List<CharacterMarvel> findByName(String name) {
         List<CharacterMarvel> characterResponseList = null;
 
@@ -34,10 +53,9 @@ public class CharacterMarvelServiceImpl implements CharacterMarvelService {
             Map<String, Object> paramsForRequest = authenticationMarvelService.getParamsUrl();
             paramsForRequest.put("name", name);
 
-            StringBuilder sbBaseUrl = new StringBuilder(authenticationMarvelService.getBaseUrl(PATH_NAME));
-            sbBaseUrl.append("&name={name}");
+            String baseUrl = authenticationMarvelService.getBaseUrl(PATH_NAME) + "&name={name}";
 
-            ResponseEntity<GenericMarvelResponse> responseEntity = restTemplate.getForEntity(sbBaseUrl.toString(), GenericMarvelResponse.class, paramsForRequest);
+            ResponseEntity<GenericMarvelResponse> responseEntity = restTemplate.getForEntity(baseUrl, GenericMarvelResponse.class, paramsForRequest);
             characterResponseList = Objects.requireNonNull(responseEntity.getBody()).getDataMarvelResponse().getResults();
 
         } catch (NoSuchAlgorithmException e) {

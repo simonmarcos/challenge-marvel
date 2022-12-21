@@ -2,6 +2,7 @@ package com.test.challenge.challenge.service.marvel.impl;
 
 import com.test.challenge.challenge.service.marvel.AuthenticationMarvelService;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
@@ -32,8 +33,24 @@ public class AuthenticationMarvelServiceImpl implements AuthenticationMarvelServ
     }
 
     @Override
+    public Map<String, Object> getParamsUrlWithPagination(Pageable pageable) throws NoSuchAlgorithmException {
+        Map<String, Object> params = new HashMap<>();
+        params.put("ts", "1");
+        params.put("apikey", publickey);
+        params.put("hash", getHash());
+        params.put("offset", pageable.getOffset());
+
+        return params;
+    }
+
+    @Override
     public String getBaseUrl(String pathname) {
         return BASE_URL + pathname + "?ts={ts}&apikey={apikey}&hash={hash}";
+    }
+
+    @Override
+    public String getBaseUrlWithPagination(String pathname) {
+        return BASE_URL + pathname + "?ts={ts}&apikey={apikey}&hash={hash}&offset={offset}";
     }
 
     private String getHash() throws NoSuchAlgorithmException {

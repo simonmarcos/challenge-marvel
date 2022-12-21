@@ -6,11 +6,16 @@ import com.test.challenge.challenge.service.dto.CharacterDTO;
 import com.test.challenge.challenge.service.dto.UserDTO;
 import com.test.challenge.challenge.service.marvel.mapper.CharacterMarvelMapper;
 import com.test.challenge.challenge.service.marvel.CharacterMarvelService;
+import com.test.challenge.challenge.service.marvel.model.CharacterMarvel;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CharacterServiceImpl implements CharacterService {
@@ -35,7 +40,12 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public Page<CharacterDTO> findAll(Pageable pageable) {
-        return null;
+        List<CharacterMarvel> characterMarvelListResponse = characterMarvelService.findAll(pageable);
+
+        List<CharacterDTO> characterDTOList = new ArrayList<>();
+        characterMarvelListResponse.forEach(characterMarvel -> characterDTOList.add(characterMarvelMapper.characterMarvelToCharacterDTO(characterMarvel)));
+
+        return new PageImpl<>(characterDTOList);
     }
 
     @Override
