@@ -1,12 +1,10 @@
 package com.test.challenge.challenge.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "character")
 public class Character extends AbstractAuditingEntity implements Serializable {
