@@ -1,0 +1,5 @@
+server.port=8080
+
+marvel.api.url=https://gateway.marvel.com/v1/public/
+marvel.api.privatekey=${MARVEL_API_PRIVATE_KEY}
+marvel.api.publickey=${MARVEL_API_PUBLIC_KEY}
