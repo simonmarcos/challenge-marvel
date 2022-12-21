@@ -28,7 +28,7 @@ public class CharacterController {
         return ResponseEntity.ok(page.getContent());
     }
 
-    @GetMapping("/character/findByName")
+    @GetMapping("/character")
     public ResponseEntity<CharacterDTO> findByName(@RequestParam(name = "name") String name) {
         return ResponseEntity.ok(characterService.findByName(name));
     }
