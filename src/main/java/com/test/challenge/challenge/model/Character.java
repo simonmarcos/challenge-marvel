@@ -25,6 +25,9 @@ public class Character extends AbstractAuditingEntity implements Serializable {
     @Column(name = "thumbnail")
     private String thumbnail;
 
+    @Column(name = "marvelId")
+    private String marvelId;
+
     @ManyToOne
     @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
     private User user;
@@ -75,5 +78,18 @@ public class Character extends AbstractAuditingEntity implements Serializable {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public String getMarvelId() {
+        return marvelId;
+    }
+
+    public void setMarvelId(String marvelId) {
+        this.marvelId = marvelId;
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" + "id=" + id + ", name='" + name + '\'' + ", description='" + description + '\'' + ", modified='" + modified + '\'' + ", thumbnail='" + thumbnail + '\'' + ", marvelId='" + marvelId + '\'' + ", user=" + user + '}';
     }
 }

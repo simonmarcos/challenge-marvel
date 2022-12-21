@@ -7,6 +7,7 @@ public class CharacterDTO {
     private String description;
     private String modified;
     private String thumbnail;
+    private String marvelId;
 
     public Long getId() {
         return id;
@@ -48,14 +49,23 @@ public class CharacterDTO {
         this.thumbnail = thumbnail;
     }
 
+    public String getMarvelId() {
+        return marvelId;
+    }
+
+    public void setMarvelId(String marvelId) {
+        this.marvelId = marvelId;
+    }
+
     @Override
     public String toString() {
         return "CharacterDTO{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", modified='" + modified + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
+                ", marvelId='" + marvelId + '\'' +
                 '}';
     }
 }
