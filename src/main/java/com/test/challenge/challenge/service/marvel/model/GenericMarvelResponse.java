@@ -4,11 +4,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class Thumbnail {
+public class GenericMarvelResponse {
 
-    @JsonProperty("path")
-    private String path;
-
-    @JsonProperty("extension")
-    private String extension;
+    @JsonProperty("data")
+    private DataMarvelResponse dataMarvelResponse;
 }

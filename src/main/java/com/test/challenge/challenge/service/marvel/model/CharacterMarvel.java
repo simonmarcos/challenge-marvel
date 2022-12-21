@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class Character {
+public class CharacterMarvel {
 
     @JsonProperty("id")
     private String id;
@@ -19,5 +19,5 @@ public class Character {
     private String modified;
 
     @JsonProperty("thumbnail")
-    private Thumbnail thumbnail;
+    private ThumbnailMarvel thumbnailMarvel;
 }

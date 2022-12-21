@@ -1,9 +1,10 @@
 package com.test.challenge.challenge.service.marvel;
 
-import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Map;
 
 public interface AuthenticationMarvelService {
+    Map<String, Object> getParamsUrl() throws NoSuchAlgorithmException;
 
-    String getHash() throws UnsupportedEncodingException, NoSuchAlgorithmException;
+    String getBaseUrl(String pathname);
 }
