@@ -1,9 +1,11 @@
 package com.test.challenge.challenge.controller;
 
+import com.test.challenge.challenge.exception.RequestException;
 import com.test.challenge.challenge.service.CharacterService;
 import com.test.challenge.challenge.service.dto.CharacterDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +26,9 @@ public class CharacterController {
 
     @GetMapping("/character")
     public ResponseEntity<List<CharacterDTO>> findAll(Pageable pageable) {
+        if (pageable.getOffset() == 0) {
+            throw new RequestException("MS-404", "No puede ser el paginable igual a 0", HttpStatus.BAD_REQUEST);
+        }
         Page<CharacterDTO> page = characterService.findAll(pageable);
         return ResponseEntity.ok(page.getContent());
     }
