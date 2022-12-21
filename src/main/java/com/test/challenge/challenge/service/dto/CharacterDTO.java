@@ -2,17 +2,17 @@ package com.test.challenge.challenge.service.dto;
 
 public class CharacterDTO {
 
-    private String id;
+    private Long id;
     private String name;
     private String description;
     private String modified;
     private String thumbnail;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

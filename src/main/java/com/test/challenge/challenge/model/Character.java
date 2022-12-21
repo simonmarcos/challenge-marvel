@@ -11,12 +11,12 @@ public class Character extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(name = "name", length = 50)
     private String name;
 
-    @Column(name = "description", length = 50)
+    @Column(name = "description", length = 500)
     private String description;
 
     @Column(name = "modified")
@@ -29,11 +29,11 @@ public class Character extends AbstractAuditingEntity implements Serializable {
     @JsonIgnoreProperties(value = {"password"}, allowSetters = true)
     private User user;
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

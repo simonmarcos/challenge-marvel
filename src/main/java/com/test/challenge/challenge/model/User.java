@@ -14,7 +14,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     @Column(name = "first_name", length = 50)
     private String firstName;
@@ -30,11 +30,11 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @JsonIgnoreProperties(allowSetters = true)
     private Set<Character> characters = new HashSet<>();
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

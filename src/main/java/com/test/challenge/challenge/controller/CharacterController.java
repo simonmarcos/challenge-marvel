@@ -5,11 +5,10 @@ import com.test.challenge.challenge.service.dto.CharacterDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -31,5 +30,12 @@ public class CharacterController {
     @GetMapping("/character/findByName")
     public ResponseEntity<CharacterDTO> findByName(@RequestParam(name = "name") String name) {
         return ResponseEntity.ok(characterService.findByName(name));
+    }
+
+    @PostMapping("/character/save")
+    public ResponseEntity<List<CharacterDTO>> save(@RequestBody List<CharacterDTO> characterDTOList, @RequestParam(name = "userId") Long userId) throws URISyntaxException {
+        List<CharacterDTO> characterDTOResponse = characterService.saveAll(characterDTOList, userId);
+
+        return ResponseEntity.created(new URI("/api/character/save")).body(characterDTOResponse);
     }
 }
