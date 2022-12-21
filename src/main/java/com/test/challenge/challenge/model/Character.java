@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "character")
@@ -86,6 +87,19 @@ public class Character extends AbstractAuditingEntity implements Serializable {
 
     public void setMarvelId(String marvelId) {
         this.marvelId = marvelId;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Character character = (Character) o;
+        return name.equals(character.name) || marvelId.equals(character.marvelId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, marvelId);
     }
 
     @Override

@@ -16,12 +16,15 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class CharacterServiceImpl implements CharacterService {
 
     private final CharacterRepository characterRepository;
@@ -44,17 +47,22 @@ public class CharacterServiceImpl implements CharacterService {
             throw new BusinessExceptions("MS-403", "No se pueden agregar más de 20 personajes.", HttpStatus.PRECONDITION_FAILED);
         }
 
+        List<CharacterDTO> characterDTOListSaved = new ArrayList<>();
+
         characterDTOList.forEach(characterDTO -> {
-            Character characterEntity = characterMapper.dtoToEntity(characterDTO);
+            if (!findByMarvelId(characterDTO.getId().toString()).isPresent()) {
+                Character characterEntity = characterMapper.dtoToEntity(characterDTO);
 
-            User user = new User();
-            user.setId(userId);
-            characterEntity.setUser(user);
+                User user = new User();
+                user.setId(userId);
+                characterEntity.setUser(user);
 
-            characterRepository.save(characterEntity);
+                characterRepository.save(characterEntity);
+                characterDTOListSaved.add(characterDTO);
+            }
         });
 
-        return characterDTOList;
+        return characterDTOListSaved;
     }
 
     @Override
@@ -77,6 +85,12 @@ public class CharacterServiceImpl implements CharacterService {
         return characterMarvelMapper.characterMarvelToCharacterDTO(characterMarvelService.findByName(name)
                 .stream()
                 .findFirst()
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "GAF not found by id " + name)));
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Character not found by name " + name)));
     }
+
+    @Override
+    public Optional<Character> findByMarvelId(String marvelId) {
+        return characterRepository.findByMarvelId(marvelId);
+    }
+
 }
