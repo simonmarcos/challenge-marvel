@@ -18,17 +18,17 @@ public class BusinessExceptions extends RuntimeException {
         this.zonedDateTime = ZonedDateTime.now();
     }
 
+    @Override
+    public String getMessage() {
+        return message;
+    }
+
     public String getCode() {
         return code;
     }
 
     public void setCode(String code) {
         this.code = code;
-    }
-
-    @Override
-    public String getMessage() {
-        return message;
     }
 
     public void setMessage(String message) {

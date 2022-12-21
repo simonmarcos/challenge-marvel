@@ -4,6 +4,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.time.ZonedDateTime;
+
 @ControllerAdvice
 public class ApiExceptionHandler {
 
@@ -13,6 +15,7 @@ public class ApiExceptionHandler {
         errorDTO.setCode(requestException.getCode());
         errorDTO.setMessage(requestException.getMessage());
         errorDTO.setHttpStatus(requestException.getHttpStatus());
+        errorDTO.setZonedDateTime(ZonedDateTime.now());
 
         return new ResponseEntity<>(errorDTO, requestException.getHttpStatus());
     }
@@ -23,6 +26,7 @@ public class ApiExceptionHandler {
         errorDTO.setCode(requestException.getCode());
         errorDTO.setMessage(requestException.getMessage());
         errorDTO.setHttpStatus(requestException.getHttpStatus());
+        errorDTO.setZonedDateTime(ZonedDateTime.now());
 
         return new ResponseEntity<>(errorDTO, requestException.getHttpStatus());
     }

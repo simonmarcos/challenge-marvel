@@ -9,17 +9,15 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
-public interface CharacterService {
+public interface CharacterCustomService {
 
-    Character save(Character character);
-
-    List<Character> saveAll(List<Character> characterDTOList);
+    List<CharacterDTO> saveAll(List<CharacterDTO> characterDTOList, Long userId);
 
     UserDTO update(CharacterDTO characterDTO);
 
-    Page<Character> findAll(Pageable pageable);
+    Page<CharacterDTO> findAll(Pageable pageable);
 
-    Optional<Character> findByName(String name);
+    CharacterDTO findByName(String name);
 
     Optional<Character> findByMarvelId(String marvelId);
 }
