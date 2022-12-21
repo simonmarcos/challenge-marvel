@@ -6,7 +6,9 @@ import com.test.challenge.challenge.service.UserService;
 import com.test.challenge.challenge.service.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
