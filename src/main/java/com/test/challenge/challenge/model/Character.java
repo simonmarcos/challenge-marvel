@@ -1,10 +1,10 @@
 package com.test.challenge.challenge.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.*;
 import java.io.Serializable;
 
 @EqualsAndHashCode(callSuper = true)
@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Character extends AbstractAuditingEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sequenceGenerator")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
 
     @Column(name = "name", length = 50)
