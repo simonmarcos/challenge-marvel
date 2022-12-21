@@ -1,5 +1,6 @@
 package com.test.challenge.challenge.service.impl;
 
+import com.test.challenge.challenge.exception.BusinessExceptions;
 import com.test.challenge.challenge.model.Character;
 import com.test.challenge.challenge.model.User;
 import com.test.challenge.challenge.repository.CharacterRepository;
@@ -38,6 +39,10 @@ public class CharacterServiceImpl implements CharacterService {
 
     @Override
     public List<CharacterDTO> saveAll(List<CharacterDTO> characterDTOList, Long userId) {
+
+        if (characterDTOList.size() > 20) {
+            throw new BusinessExceptions("MS-403", "No se pueden agregar más de 20 personajes.", HttpStatus.PRECONDITION_FAILED);
+        }
 
         characterDTOList.forEach(characterDTO -> {
             Character characterEntity = characterMapper.dtoToEntity(characterDTO);

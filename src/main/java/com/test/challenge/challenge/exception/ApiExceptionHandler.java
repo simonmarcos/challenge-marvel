@@ -16,4 +16,14 @@ public class ApiExceptionHandler {
 
         return new ResponseEntity<>(errorDTO, requestException.getHttpStatus());
     }
+
+    @ExceptionHandler(value = {BusinessExceptions.class})
+    public ResponseEntity<ErrorDTO> responseException(BusinessExceptions requestException) {
+        ErrorDTO errorDTO = new ErrorDTO();
+        errorDTO.setCode(requestException.getCode());
+        errorDTO.setMessage(requestException.getMessage());
+        errorDTO.setHttpStatus(requestException.getHttpStatus());
+
+        return new ResponseEntity<>(errorDTO, requestException.getHttpStatus());
+    }
 }
