@@ -26,9 +26,6 @@ public class CharacterController {
 
     @GetMapping("/character")
     public ResponseEntity<List<CharacterDTO>> findAll(Pageable pageable) {
-        if (pageable.getOffset() == 0) {
-            throw new RequestException("MS-404", "No puede ser el paginable igual a 0", HttpStatus.BAD_REQUEST);
-        }
         Page<CharacterDTO> page = characterService.findAll(pageable);
         return ResponseEntity.ok(page.getContent());
     }
