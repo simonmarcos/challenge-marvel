@@ -1,11 +1,9 @@
 package com.test.challenge.challenge.controller;
 
-import com.test.challenge.challenge.exception.RequestException;
 import com.test.challenge.challenge.service.CharacterService;
 import com.test.challenge.challenge.service.dto.CharacterDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
