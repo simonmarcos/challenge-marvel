@@ -1,8 +1,8 @@
-package com.test.challenge.challenge.security.jwt;
+package com.test.challenge.challenge.security.dto;
 
 import org.springframework.http.HttpStatus;
 
-public class CustomResponse {
+public class CustomResponseDTO {
 
     private String token;
     private HttpStatus status;

@@ -1,4 +1,4 @@
-package com.test.challenge.challenge.security;
+package com.test.challenge.challenge.security.dto;
 
 public class AuthCredentialsDTO {
 

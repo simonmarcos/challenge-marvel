@@ -2,8 +2,9 @@ package com.test.challenge.challenge.security.jwt;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.challenge.challenge.security.AuthCredentialsDTO;
+import com.test.challenge.challenge.security.dto.AuthCredentialsDTO;
 import com.test.challenge.challenge.security.UserDetailsImpl;
+import com.test.challenge.challenge.security.dto.CustomResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -49,12 +50,12 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     }
 
     private String getResponseBodyInString(String token) throws JsonProcessingException {
-        CustomResponse customResponse = new CustomResponse();
-        customResponse.setToken(token);
-        customResponse.setStatus(HttpStatus.OK);
-        customResponse.setDateTime(ZonedDateTime.now().toString());
+        CustomResponseDTO customResponseDTO = new CustomResponseDTO();
+        customResponseDTO.setToken(token);
+        customResponseDTO.setStatus(HttpStatus.OK);
+        customResponseDTO.setDateTime(ZonedDateTime.now().toString());
 
         ObjectMapper objectMapper = new ObjectMapper();
-        return objectMapper.writeValueAsString(customResponse);
+        return objectMapper.writeValueAsString(customResponseDTO);
     }
 }
