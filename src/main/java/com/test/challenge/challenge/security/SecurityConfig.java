@@ -1,5 +1,7 @@
 package com.test.challenge.challenge.security;
 
+import com.test.challenge.challenge.security.jwt.JWTAuthenticationFilter;
+import com.test.challenge.challenge.security.jwt.JWTAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;

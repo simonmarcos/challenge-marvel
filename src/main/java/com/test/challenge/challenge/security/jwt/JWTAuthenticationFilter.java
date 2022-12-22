@@ -1,6 +1,8 @@
-package com.test.challenge.challenge.security;
+package com.test.challenge.challenge.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.test.challenge.challenge.security.AuthCredentialsDTO;
+import com.test.challenge.challenge.security.UserDetailsImpl;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -18,10 +20,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
-        AuthCredentials authCredentials = new AuthCredentials();
+        AuthCredentialsDTO authCredentials = new AuthCredentialsDTO();
 
         try {
-            authCredentials = new ObjectMapper().readValue(request.getReader(), AuthCredentials.class);
+            authCredentials = new ObjectMapper().readValue(request.getReader(), AuthCredentialsDTO.class);
         } catch (IOException ioException) {
             ioException.printStackTrace();
         }

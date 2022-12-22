@@ -8,11 +8,13 @@ import com.test.challenge.challenge.service.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Transactional
 public class CharacterServiceImpl implements CharacterService {
 
     private final CharacterRepository characterRepository;

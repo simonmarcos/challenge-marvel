@@ -1,4 +1,4 @@
-package com.test.challenge.challenge.security;
+package com.test.challenge.challenge.security.jwt;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;

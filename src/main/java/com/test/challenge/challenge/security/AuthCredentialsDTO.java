@@ -1,6 +1,6 @@
 package com.test.challenge.challenge.security;
 
-public class AuthCredentials {
+public class AuthCredentialsDTO {
 
     private String email;
     private String password;
