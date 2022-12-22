@@ -50,7 +50,7 @@ public class UserDetailsImpl implements UserDetails {
         return false;
     }
 
-    public String getNombre() {
+    public String getName() {
         return user.getFirstName();
     }
 }
