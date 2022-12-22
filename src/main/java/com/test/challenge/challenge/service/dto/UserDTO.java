@@ -7,6 +7,7 @@ public class UserDTO implements Serializable {
     private Long id;
     private String firstName;
     private String lastName;
+    private String email;
 
     public Long getId() {
         return id;
@@ -32,12 +33,21 @@ public class UserDTO implements Serializable {
         this.lastName = lastName;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return "UserDTO{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }
