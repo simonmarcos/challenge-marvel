@@ -8,6 +8,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -18,17 +20,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDTO save(User user) {
-        return null;
+    public User save(User user) {
+        return userRepository.save(user);
     }
 
     @Override
-    public UserDTO update(User user) {
-        return null;
+    public User update(User user) {
+        return userRepository.save(user);
     }
 
     @Override
     public Page<UserDTO> findAll(Pageable pageable) {
         return null;
+    }
+
+    @Override
+    public Optional<User> findByOneEmail(String email) {
+        return userRepository.findOneByEmail(email);
     }
 }

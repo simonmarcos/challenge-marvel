@@ -22,6 +22,9 @@ public class User extends AbstractAuditingEntity implements Serializable {
     @Column(name = "last_name", length = 50)
     private String lastName;
 
+    @Column(name = "email", length = 50)
+    private String email;
+
     @Column(name = "password", length = 30)
     private String password;
 
@@ -60,6 +63,14 @@ public class User extends AbstractAuditingEntity implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Set<Character> getCharacters() {
