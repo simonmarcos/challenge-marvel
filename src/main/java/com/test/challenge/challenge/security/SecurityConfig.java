@@ -35,6 +35,8 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf().disable()
                 .authorizeRequests()
+                .antMatchers("/api/health").permitAll()
+                .antMatchers("/api/**").authenticated()
                 .anyRequest()
                 .authenticated()
                 .and()
