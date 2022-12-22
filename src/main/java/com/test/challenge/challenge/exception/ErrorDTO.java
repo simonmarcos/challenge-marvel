@@ -8,7 +8,7 @@ public class ErrorDTO {
     private String code;
     private String message;
     private HttpStatus httpStatus;
-    private ZonedDateTime zonedDateTime;
+    private ZonedDateTime dateTime;
 
     public ErrorDTO(String code, String message, HttpStatus httpStatus) {
         this.code = code;
@@ -43,12 +43,12 @@ public class ErrorDTO {
         this.httpStatus = httpStatus;
     }
 
-    public ZonedDateTime getZonedDateTime() {
-        return zonedDateTime;
+    public ZonedDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setZonedDateTime(ZonedDateTime zonedDateTime) {
-        this.zonedDateTime = zonedDateTime;
+    public void setDateTime(ZonedDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 
     @Override
@@ -57,7 +57,7 @@ public class ErrorDTO {
                 "code='" + code + '\'' +
                 ", message='" + message + '\'' +
                 ", httpStatus=" + httpStatus +
-                ", zonedDateTime=" + zonedDateTime +
+                ", zonedDateTime=" + dateTime +
                 '}';
     }
 }

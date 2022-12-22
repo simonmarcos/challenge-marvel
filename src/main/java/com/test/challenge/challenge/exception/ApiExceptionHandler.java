@@ -15,7 +15,7 @@ public class ApiExceptionHandler {
         errorDTO.setCode(requestException.getCode());
         errorDTO.setMessage(requestException.getMessage());
         errorDTO.setHttpStatus(requestException.getHttpStatus());
-        errorDTO.setZonedDateTime(ZonedDateTime.now());
+        errorDTO.setDateTime(ZonedDateTime.now());
 
         return new ResponseEntity<>(errorDTO, requestException.getHttpStatus());
     }
@@ -26,7 +26,7 @@ public class ApiExceptionHandler {
         errorDTO.setCode(requestException.getCode());
         errorDTO.setMessage(requestException.getMessage());
         errorDTO.setHttpStatus(requestException.getHttpStatus());
-        errorDTO.setZonedDateTime(ZonedDateTime.now());
+        errorDTO.setDateTime(ZonedDateTime.now());
 
         return new ResponseEntity<>(errorDTO, requestException.getHttpStatus());
     }

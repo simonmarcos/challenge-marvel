@@ -8,14 +8,14 @@ public class RequestException extends RuntimeException {
     private String code;
     private String message;
     private HttpStatus httpStatus;
-    private ZonedDateTime zonedDateTime;
+    private ZonedDateTime dateTime;
 
     public RequestException(String code, String message, HttpStatus httpStatus) {
         super(message);
         this.code = code;
         this.message = message;
         this.httpStatus = httpStatus;
-        this.zonedDateTime = ZonedDateTime.now();
+        this.dateTime = ZonedDateTime.now();
     }
 
     public String getCode() {
@@ -43,11 +43,11 @@ public class RequestException extends RuntimeException {
         this.httpStatus = httpStatus;
     }
 
-    public ZonedDateTime getZonedDateTime() {
-        return zonedDateTime;
+    public ZonedDateTime getDateTime() {
+        return dateTime;
     }
 
-    public void setZonedDateTime(ZonedDateTime zonedDateTime) {
-        this.zonedDateTime = zonedDateTime;
+    public void setDateTime(ZonedDateTime dateTime) {
+        this.dateTime = dateTime;
     }
 }
