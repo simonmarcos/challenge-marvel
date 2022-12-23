@@ -17,7 +17,7 @@ public class TokenUtils {
     private final static Long ACCESS_TOKEN_VALIDITY_SECOND = 3600L;
 
     public static String createToken(String name, String email) {
-        Date expirationDate = new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECOND);
+        Date expirationDate = new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECOND * 1000);
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("name", name);
@@ -42,6 +42,7 @@ public class TokenUtils {
 
             return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
         } catch (JwtException exception) {
+            exception.printStackTrace();
             return null;
         }
     }

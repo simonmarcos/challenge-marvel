@@ -2,10 +2,11 @@ package com.test.challenge.challenge.security.jwt;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.test.challenge.challenge.security.dto.AuthCredentialsDTO;
 import com.test.challenge.challenge.security.UserDetailsImpl;
+import com.test.challenge.challenge.security.dto.AuthCredentialsDTO;
 import com.test.challenge.challenge.security.dto.CustomResponseDTO;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -21,6 +22,12 @@ import java.util.Collections;
 
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
+    private final AuthenticationManager authenticationManager;
+
+    public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {
         AuthCredentialsDTO authCredentials = new AuthCredentialsDTO();
@@ -33,7 +40,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(authCredentials.getEmail(), authCredentials.getPassword(), Collections.emptyList());
 
-        return getAuthenticationManager().authenticate(usernamePasswordAuthenticationToken);
+        return authenticationManager.authenticate(usernamePasswordAuthenticationToken);
     }
 
     @Override

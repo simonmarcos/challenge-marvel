@@ -14,12 +14,15 @@ import java.io.IOException;
 @Component
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
+    private static final String HEADER_TOKEN_PREFIX = "Bearer ";
+    private static final String HEADER_AUTHORIZATION = "Authorization";
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String bearerToken = request.getHeader("Authorization");
+        String bearerToken = request.getHeader(HEADER_AUTHORIZATION);
 
-        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
-            String token = bearerToken.replace("Bearer ", "");
+        if (bearerToken != null && bearerToken.startsWith(HEADER_TOKEN_PREFIX)) {
+            String token = bearerToken.replace(HEADER_TOKEN_PREFIX, "");
             UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = TokenUtils.getAuthentication(token);
 
             SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
