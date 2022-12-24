@@ -7,6 +7,8 @@ import com.test.challenge.challenge.service.UserCustomService;
 import com.test.challenge.challenge.service.UserService;
 import com.test.challenge.challenge.service.dto.UserDTO;
 import com.test.challenge.challenge.service.mapper.UserMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ import java.util.Optional;
 @Service
 @Transactional
 public class UserCustomServiceImpl implements UserCustomService {
+
+    private final Logger log = LoggerFactory.getLogger(UserCustomServiceImpl.class);
 
     private final UserService userService;
     private final UserMapper userMapper;
