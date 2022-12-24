@@ -3,9 +3,7 @@ package com.test.challenge.challenge.service.impl;
 import com.test.challenge.challenge.model.User;
 import com.test.challenge.challenge.repository.UserRepository;
 import com.test.challenge.challenge.service.UserService;
-import com.test.challenge.challenge.service.dto.UserDTO;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,13 +14,16 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
 
@@ -32,12 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Page<UserDTO> findAll(Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public Optional<User> findByOneEmail(String email) {
+    public Optional<User> findOneByEmail(String email) {
         return userRepository.findOneByEmail(email);
     }
 }
