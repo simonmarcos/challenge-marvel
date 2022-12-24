@@ -1,7 +1,7 @@
 package com.test.challenge.challenge.controller;
 
 import com.test.challenge.challenge.model.User;
-import com.test.challenge.challenge.service.UserService;
+import com.test.challenge.challenge.service.UserCustomService;
 import com.test.challenge.challenge.service.dto.UserDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,15 +13,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api")
 public class UserController {
 
-    private final UserService userService;
+    private final UserCustomService userCustomService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(UserCustomService userCustomService) {
+        this.userCustomService = userCustomService;
     }
 
-    @PostMapping("/save")
+    @PostMapping("/user/save")
     public ResponseEntity<UserDTO> save(@RequestBody User user) {
-        UserDTO userDTO = userService.save(user);
+        UserDTO userDTO = userCustomService.save(user);
         return ResponseEntity.ok(userDTO);
     }
 }

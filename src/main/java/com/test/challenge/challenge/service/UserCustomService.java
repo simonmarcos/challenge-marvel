@@ -5,11 +5,8 @@ import com.test.challenge.challenge.service.dto.UserDTO;
 
 import java.util.Optional;
 
-public interface UserService {
+public interface UserCustomService {
+    UserDTO save(User user);
 
-    User save(User user);
-
-    User update(User user);
-
-    Optional<User> findOneByEmail(String email);
+    Optional<UserDTO> findOneByEmail(String email);
 }
