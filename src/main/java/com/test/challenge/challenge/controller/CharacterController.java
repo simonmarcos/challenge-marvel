@@ -1,6 +1,7 @@
 package com.test.challenge.challenge.controller;
 
 import com.test.challenge.challenge.exception.BusinessExceptions;
+import com.test.challenge.challenge.model.Character;
 import com.test.challenge.challenge.service.CharacterCustomService;
 import com.test.challenge.challenge.service.dto.CharacterDTO;
 import org.springframework.data.domain.Page;
@@ -9,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -35,8 +37,8 @@ public class CharacterController {
     }
 
     @PostMapping("/character/save")
-    public ResponseEntity<List<CharacterDTO>> save(@RequestBody List<CharacterDTO> characterDTOList, @RequestParam(name = "userId") Long userId) throws URISyntaxException {
-        List<CharacterDTO> characterDTOResponse = characterCustomService.saveAll(characterDTOList, userId);
+    public ResponseEntity<List<CharacterDTO>> save(@Valid @RequestBody List<Character> characterList, @RequestParam(name = "userId") Long userId) throws URISyntaxException {
+        List<CharacterDTO> characterDTOResponse = characterCustomService.saveAll(characterList, userId);
 
         if (characterDTOResponse.size() == 0) {
             throw new BusinessExceptions("MS-405", "Los personajes enviados ya se encuentran en la base de datos.", HttpStatus.BAD_REQUEST);

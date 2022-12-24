@@ -11,7 +11,7 @@ import java.util.Optional;
 
 public interface CharacterCustomService {
 
-    List<CharacterDTO> saveAll(List<CharacterDTO> characterDTOList, Long userId);
+    List<CharacterDTO> saveAll(List<Character> characterDTOList, Long userId);
 
     UserDTO update(CharacterDTO characterDTO);
 

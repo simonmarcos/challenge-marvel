@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -20,7 +22,7 @@ public class UserController {
     }
 
     @PostMapping("/user/save")
-    public ResponseEntity<UserDTO> save(@RequestBody User user) {
+    public ResponseEntity<UserDTO> save(@Valid @RequestBody User user) {
         UserDTO userDTO = userCustomService.save(user);
         return ResponseEntity.ok(userDTO);
     }
