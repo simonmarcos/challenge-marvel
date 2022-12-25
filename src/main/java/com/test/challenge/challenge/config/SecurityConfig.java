@@ -1,4 +1,4 @@
-package com.test.challenge.challenge.security;
+package com.test.challenge.challenge.config;
 
 import com.test.challenge.challenge.security.jwt.JWTAuthenticationFilter;
 import com.test.challenge.challenge.security.jwt.JWTAuthorizationFilter;
@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/api/health").permitAll()
-                .antMatchers("/api/**").authenticated()
+                .antMatchers("/api/**").permitAll()
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -62,4 +62,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
 }
