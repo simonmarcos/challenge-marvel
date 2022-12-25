@@ -17,6 +17,8 @@ public interface CharacterService {
 
     UserDTO update(CharacterDTO characterDTO);
 
+    Page<Character> findAllByUserId(Long id, Pageable pageable);
+
     Page<Character> findAll(Pageable pageable);
 
     Optional<Character> findByName(String name);

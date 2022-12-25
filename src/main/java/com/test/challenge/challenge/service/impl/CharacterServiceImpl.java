@@ -39,6 +39,11 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    public Page<Character> findAllByUserId(Long userId, Pageable pageable) {
+        return characterRepository.findAllByUserId(userId, pageable);
+    }
+
+    @Override
     public Page<Character> findAll(Pageable pageable) {
         return characterRepository.findAll(pageable);
     }

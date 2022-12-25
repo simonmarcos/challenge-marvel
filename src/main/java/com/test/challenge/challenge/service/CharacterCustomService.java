@@ -15,7 +15,9 @@ public interface CharacterCustomService {
 
     UserDTO update(CharacterDTO characterDTO);
 
-    Page<CharacterDTO> findAll(Pageable pageable);
+    Page<CharacterDTO> findAllByUserId(Long id, Pageable pageable);
+
+    Page<CharacterDTO> findAllOfMarvelApi(Pageable pageable);
 
     CharacterDTO findByName(String name);
 

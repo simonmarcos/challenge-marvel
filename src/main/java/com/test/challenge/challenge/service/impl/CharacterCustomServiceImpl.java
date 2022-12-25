@@ -41,28 +41,27 @@ public class CharacterCustomServiceImpl implements CharacterCustomService {
     }
 
     @Override
-    public List<CharacterDTO> saveAll(List<CharacterDTO> characterDTOList, Long userId) {
+    public List<CharacterDTO> saveAll(List<Character> characterList, Long userId) {
 
-        if (characterDTOList.size() > 20) {
+        if (characterList.size() > 20) {
             throw new BusinessExceptions("MS-403", "No se pueden agregar más de 20 personajes.", HttpStatus.PRECONDITION_FAILED);
         }
 
-        List<CharacterDTO> characterDTOListSaved = new ArrayList<>();
+        List<CharacterDTO> characterDTOSaved = new ArrayList<>();
 
-        characterDTOList.forEach(characterDTO -> {
-            if (!findByMarvelId(characterDTO.getId().toString()).isPresent()) {
-                Character characterEntity = characterMapper.dtoToEntity(characterDTO);
+        characterList.forEach(character -> {
+            if (!findByMarvelId(character.getId().toString()).isPresent()) {
 
                 User user = new User();
                 user.setId(userId);
-                characterEntity.setUser(user);
+                character.setUser(user);
 
-                characterService.save(characterEntity);
-                characterDTOListSaved.add(characterDTO);
+                characterService.save(character);
+                characterDTOSaved.add(characterMapper.entityToDTO(character));
             }
         });
 
-        return characterDTOListSaved;
+        return characterDTOSaved;
     }
 
     @Override
@@ -71,7 +70,20 @@ public class CharacterCustomServiceImpl implements CharacterCustomService {
     }
 
     @Override
-    public Page<CharacterDTO> findAll(Pageable pageable) {
+    public Page<CharacterDTO> findAllByUserId(Long userId, Pageable pageable) {
+        Page<Character> characters = characterService.findAllByUserId(userId, pageable);
+
+        List<CharacterDTO> characterDTOList = new ArrayList<>();
+
+        characters.getContent().forEach(character -> {
+            characterDTOList.add(characterMapper.entityToDTO(character));
+        });
+
+        return new PageImpl<>(characterDTOList);
+    }
+
+    @Override
+    public Page<CharacterDTO> findAllOfMarvelApi(Pageable pageable) {
         List<CharacterMarvel> characterMarvelListResponse = characterMarvelService.findAll(pageable);
 
         List<CharacterDTO> characterDTOList = new ArrayList<>();

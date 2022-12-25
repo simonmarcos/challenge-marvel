@@ -25,9 +25,15 @@ public class CharacterController {
         this.characterCustomService = characterCustomService;
     }
 
-    @GetMapping("/character")
-    public ResponseEntity<List<CharacterDTO>> findAll(Pageable pageable) {
-        Page<CharacterDTO> page = characterCustomService.findAll(pageable);
+    @GetMapping("/character/findAllFromMarvelApi")
+    public ResponseEntity<List<CharacterDTO>> findAllFromMarvelApi(Pageable pageable) {
+        Page<CharacterDTO> page = characterCustomService.findAllOfMarvelApi(pageable);
+        return ResponseEntity.ok(page.getContent());
+    }
+
+    @GetMapping("/character/findAllByUser")
+    public ResponseEntity<List<CharacterDTO>> findAllByUser(@RequestParam(name = "user") Long userId, Pageable pageable) {
+        Page<CharacterDTO> page = characterCustomService.findAllByUserId(userId, pageable);
         return ResponseEntity.ok(page.getContent());
     }
 
