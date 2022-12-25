@@ -15,8 +15,8 @@ public interface CharacterRepository extends JpaRepository<Character, Long> {
 
     Optional<Character> findByName(String name);
 
-    @Query("SELECT character FROM Character character WHERE character.user = :user")
-    Page<Character> findAllByUserId(@Param("user") Long user, Pageable pageable);
+    @Query("SELECT character FROM Character character WHERE character.user.id = :userId")
+    Page<Character> findAllByUserId(@Param("userId") Long userId, Pageable pageable);
 
     Optional<Character> findByMarvelId(String marvelId);
 }
