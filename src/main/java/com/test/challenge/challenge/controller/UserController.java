@@ -3,13 +3,14 @@ package com.test.challenge.challenge.controller;
 import com.test.challenge.challenge.model.User;
 import com.test.challenge.challenge.service.UserCustomService;
 import com.test.challenge.challenge.service.dto.UserDTO;
+import org.apache.tomcat.util.http.ResponseUtil;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -25,5 +26,16 @@ public class UserController {
     public ResponseEntity<UserDTO> save(@Valid @RequestBody User user) {
         UserDTO userDTO = userCustomService.save(user);
         return ResponseEntity.ok(userDTO);
+    }
+
+    @GetMapping("/user/findByEmail")
+    public ResponseEntity<UserDTO> findByEmail(@RequestParam(name = "email") String email) {
+        Optional<UserDTO> userDTO = userCustomService.findOneByEmail(email);
+
+        if (!userDTO.isPresent()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+
+        return ResponseEntity.ok(userDTO.get());
     }
 }
