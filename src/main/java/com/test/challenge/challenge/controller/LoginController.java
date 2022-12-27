@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 
 @RestController
@@ -28,7 +29,7 @@ public class LoginController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<CustomResponseDTO> login(@RequestBody AuthCredentialsDTO authCredentialsDTO) {
+    public ResponseEntity<CustomResponseDTO> login(@Valid @RequestBody AuthCredentialsDTO authCredentialsDTO) {
         try {
             Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authCredentialsDTO.getEmail(), authCredentialsDTO.getPassword()));
             if (authentication.isAuthenticated()) {
