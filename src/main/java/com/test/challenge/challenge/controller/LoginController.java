@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,17 +29,22 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<CustomResponseDTO> login(@RequestBody AuthCredentialsDTO authCredentialsDTO) {
-        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authCredentialsDTO.getEmail(), authCredentialsDTO.getPassword()));
-        if (authentication.isAuthenticated()) {
-            String token = Jwts.builder().setSubject(authentication.getName()).signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes())).compact();
+        try {
+            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authCredentialsDTO.getEmail(), authCredentialsDTO.getPassword()));
+            if (authentication.isAuthenticated()) {
+                String token = Jwts.builder().setSubject(authentication.getName()).signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes())).compact();
 
-            CustomResponseDTO customResponseDTO = new CustomResponseDTO();
-            customResponseDTO.setToken(token);
-            customResponseDTO.setStatus(HttpStatus.OK);
-            customResponseDTO.setDateTime(LocalDateTime.now().toString());
+                CustomResponseDTO customResponseDTO = new CustomResponseDTO();
+                customResponseDTO.setToken(token);
+                customResponseDTO.setStatus(HttpStatus.OK);
+                customResponseDTO.setDateTime(LocalDateTime.now().toString());
 
-            return ResponseEntity.ok(customResponseDTO);
+                return ResponseEntity.ok(customResponseDTO);
+            }
+            throw new RequestException("MS-401", "Usuario no autorizado", HttpStatus.UNAUTHORIZED);
+
+        } catch (AuthenticationException exception) {
+            throw new RequestException("MS-401", exception.getMessage(), HttpStatus.UNAUTHORIZED);
         }
-        throw new RequestException("MS-401", "Usuario no autorizado", HttpStatus.UNAUTHORIZED);
     }
 }
