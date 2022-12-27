@@ -3,7 +3,6 @@ package com.test.challenge.challenge.controller;
 import com.test.challenge.challenge.model.User;
 import com.test.challenge.challenge.service.UserCustomService;
 import com.test.challenge.challenge.service.dto.UserDTO;
-import org.apache.tomcat.util.http.ResponseUtil;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
