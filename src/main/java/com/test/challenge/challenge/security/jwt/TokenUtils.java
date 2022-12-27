@@ -1,8 +1,6 @@
 package com.test.challenge.challenge.security.jwt;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
@@ -33,7 +31,7 @@ public class TokenUtils {
     public static UsernamePasswordAuthenticationToken getAuthentication(String token) {
         try {
             Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(ACCESS_TOKEN_SECRET.getBytes())
+                    .setSigningKey(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
                     .build()
                     .parseClaimsJws(token)
                     .getBody();

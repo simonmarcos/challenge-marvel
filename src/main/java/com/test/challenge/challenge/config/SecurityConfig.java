@@ -1,6 +1,5 @@
 package com.test.challenge.challenge.config;
 
-import com.test.challenge.challenge.security.jwt.JWTAuthenticationFilter;
 import com.test.challenge.challenge.security.jwt.JWTAuthorizationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,21 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         this.jwtAuthorizationFilter = jwtAuthorizationFilter;
     }
 
-    @Bean
-    public CorsFilter corsFilter() {
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-
-        CorsConfiguration config = new CorsConfiguration();
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:3000");
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-        config.addExposedHeader(HttpHeaders.AUTHORIZATION);
-
-        source.registerCorsConfiguration("/**", config);
-        return new CorsFilter(source);
-    }
-
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -64,13 +48,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement()
                 .sessionCreationPolicy((SessionCreationPolicy.STATELESS))
                 .and()
-                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class)
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()));
+                .addFilterBefore(jwtAuthorizationFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService);
+    }
+
+    @Bean
+    public CorsFilter corsFilter() {
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        CorsConfiguration config = new CorsConfiguration();
+        config.setAllowCredentials(true);
+        config.addAllowedOrigin("http://localhost:3000");
+        config.addAllowedHeader("*");
+        config.addAllowedMethod("*");
+        config.addExposedHeader(HttpHeaders.AUTHORIZATION);
+
+        source.registerCorsConfiguration("/**", config);
+        return new CorsFilter(source);
     }
 
     @Bean
