@@ -1,8 +1,8 @@
 package com.test.challenge.challenge.controller;
 
 import com.test.challenge.challenge.exception.RequestException;
-import com.test.challenge.challenge.security.dto.AuthCredentialsDTO;
-import com.test.challenge.challenge.security.dto.CustomResponseDTO;
+import com.test.challenge.challenge.service.dto.AuthCredentialsDTO;
+import com.test.challenge.challenge.service.dto.CustomResponseDTO;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.http.HttpStatus;

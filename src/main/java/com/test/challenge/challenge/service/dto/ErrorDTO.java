@@ -1,4 +1,4 @@
-package com.test.challenge.challenge.model;
+package com.test.challenge.challenge.service.dto;
 
 import org.springframework.http.HttpStatus;
 
