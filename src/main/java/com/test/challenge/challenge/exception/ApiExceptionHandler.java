@@ -1,5 +1,6 @@
 package com.test.challenge.challenge.exception;
 
+import com.test.challenge.challenge.model.ErrorDTO;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;

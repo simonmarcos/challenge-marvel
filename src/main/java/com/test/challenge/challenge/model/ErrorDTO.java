@@ -1,4 +1,4 @@
-package com.test.challenge.challenge.exception;
+package com.test.challenge.challenge.model;
 
 import org.springframework.http.HttpStatus;
 
