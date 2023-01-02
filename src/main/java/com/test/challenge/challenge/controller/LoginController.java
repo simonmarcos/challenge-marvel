@@ -30,22 +30,16 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<CustomResponseDTO> login(@Valid @RequestBody AuthCredentialsDTO authCredentialsDTO) {
-        try {
-            Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authCredentialsDTO.getEmail(), authCredentialsDTO.getPassword()));
-            if (authentication.isAuthenticated()) {
-                String token = Jwts.builder().setSubject(authentication.getName()).signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes())).compact();
 
-                CustomResponseDTO customResponseDTO = new CustomResponseDTO();
-                customResponseDTO.setToken(token);
-                customResponseDTO.setStatus(HttpStatus.OK);
-                customResponseDTO.setDateTime(LocalDateTime.now().toString());
+        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authCredentialsDTO.getEmail(), authCredentialsDTO.getPassword()));
 
-                return ResponseEntity.ok(customResponseDTO);
-            }
-            throw new RequestException("MS-401", "Usuario no autorizado", HttpStatus.UNAUTHORIZED);
+        String token = Jwts.builder().setSubject(authentication.getName()).signWith(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes())).compact();
 
-        } catch (AuthenticationException exception) {
-            throw new RequestException("MS-401", exception.getMessage(), HttpStatus.UNAUTHORIZED);
-        }
+        CustomResponseDTO customResponseDTO = new CustomResponseDTO();
+        customResponseDTO.setToken(token);
+        customResponseDTO.setStatus(HttpStatus.OK);
+        customResponseDTO.setDateTime(LocalDateTime.now().toString());
+
+        return ResponseEntity.ok(customResponseDTO);
     }
 }

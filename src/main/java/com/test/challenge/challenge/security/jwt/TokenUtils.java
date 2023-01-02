@@ -28,20 +28,16 @@ public class TokenUtils {
                 .compact();
     }
 
-    public static UsernamePasswordAuthenticationToken getAuthentication(String token) {
-        try {
-            Claims claims = Jwts.parserBuilder()
-                    .setSigningKey(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
-                    .build()
-                    .parseClaimsJws(token)
-                    .getBody();
+    public static UsernamePasswordAuthenticationToken getAuthentication(String token) throws JwtException {
+        Claims claims = Jwts.parserBuilder()
+                .setSigningKey(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
 
-            String email = claims.getSubject();
+        String email = claims.getSubject();
 
-            return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
-        } catch (JwtException exception) {
-            exception.printStackTrace();
-            return null;
-        }
+        return new UsernamePasswordAuthenticationToken(email, null, Collections.emptyList());
+
     }
 }

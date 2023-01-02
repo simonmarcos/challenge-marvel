@@ -23,11 +23,15 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
         if (bearerToken != null && bearerToken.startsWith(HEADER_TOKEN_PREFIX)) {
             String token = bearerToken.replace(HEADER_TOKEN_PREFIX, "");
-            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = TokenUtils.getAuthentication(token);
-
-            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            try {
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = TokenUtils.getAuthentication(token);
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                filterChain.doFilter(request, response);
+            } catch (Exception e) {
+                throw new RuntimeException(e.getMessage());
+            }
+        } else {
+            filterChain.doFilter(request, response);
         }
-
-        filterChain.doFilter(request, response);
     }
 }
