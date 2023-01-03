@@ -1,6 +1,6 @@
 package com.test.challenge.challenge.service.marvel.mapper;
 
-import com.test.challenge.challenge.service.dto.CharacterDTO;
+import com.test.challenge.challenge.service.dto.CharacterMarvelDTO;
 import com.test.challenge.challenge.service.marvel.model.CharacterMarvel;
 import com.test.challenge.challenge.service.marvel.model.ThumbnailMarvel;
 import org.mapstruct.Mapper;
@@ -9,8 +9,9 @@ import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring")
 public interface CharacterMarvelMapper {
+    @Mapping(source = "id", target = "marvelId")
     @Mapping(source = "thumbnailMarvel", target = "thumbnail", qualifiedByName = "concatThumbnail")
-    CharacterDTO characterMarvelToCharacterDTO(CharacterMarvel characterMarvel);
+    CharacterMarvelDTO characterMarvelToCharacterMarvelDTO(CharacterMarvel characterMarvel);
 
     @Named("concatThumbnail")
     static String concatThumbnail(ThumbnailMarvel thumbnailMarvel) {

@@ -4,6 +4,7 @@ import com.test.challenge.challenge.exception.BusinessExceptions;
 import com.test.challenge.challenge.model.Character;
 import com.test.challenge.challenge.service.CharacterCustomService;
 import com.test.challenge.challenge.service.dto.CharacterDTO;
+import com.test.challenge.challenge.service.dto.CharacterMarvelDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -26,8 +27,8 @@ public class CharacterController {
     }
 
     @GetMapping("/character/findAllFromMarvelApi")
-    public ResponseEntity<List<CharacterDTO>> findAllFromMarvelApi(Pageable pageable) {
-        Page<CharacterDTO> page = characterCustomService.findAllOfMarvelApi(pageable);
+    public ResponseEntity<List<CharacterMarvelDTO>> findAllFromMarvelApi(Pageable pageable) {
+        Page<CharacterMarvelDTO> page = characterCustomService.findAllOfMarvelApi(pageable);
         return ResponseEntity.ok(page.getContent());
     }
 
@@ -38,7 +39,7 @@ public class CharacterController {
     }
 
     @GetMapping("/character/findByName")
-    public ResponseEntity<CharacterDTO> findByName(@RequestParam(name = "name") String name) {
+    public ResponseEntity<CharacterMarvelDTO> findByName(@RequestParam(name = "name") String name) {
         return ResponseEntity.ok(characterCustomService.findByName(name));
     }
 

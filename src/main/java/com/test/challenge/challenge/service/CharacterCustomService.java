@@ -2,6 +2,7 @@ package com.test.challenge.challenge.service;
 
 import com.test.challenge.challenge.model.Character;
 import com.test.challenge.challenge.service.dto.CharacterDTO;
+import com.test.challenge.challenge.service.dto.CharacterMarvelDTO;
 import com.test.challenge.challenge.service.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,9 +18,9 @@ public interface CharacterCustomService {
 
     Page<CharacterDTO> findAllByUserId(Long userId, Pageable pageable);
 
-    Page<CharacterDTO> findAllOfMarvelApi(Pageable pageable);
+    Page<CharacterMarvelDTO> findAllOfMarvelApi(Pageable pageable);
 
-    CharacterDTO findByName(String name);
+    CharacterMarvelDTO findByName(String name);
 
     Optional<Character> findByMarvelId(String marvelId);
 }
