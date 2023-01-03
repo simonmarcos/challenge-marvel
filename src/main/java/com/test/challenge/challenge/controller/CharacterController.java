@@ -2,6 +2,7 @@ package com.test.challenge.challenge.controller;
 
 import com.test.challenge.challenge.exception.BusinessExceptions;
 import com.test.challenge.challenge.model.Character;
+import com.test.challenge.challenge.service.CharacterCustomMarvelService;
 import com.test.challenge.challenge.service.CharacterCustomService;
 import com.test.challenge.challenge.service.dto.CharacterDTO;
 import com.test.challenge.challenge.service.dto.CharacterMarvelDTO;
@@ -21,14 +22,16 @@ import java.util.List;
 public class CharacterController {
 
     private final CharacterCustomService characterCustomService;
+    private final CharacterCustomMarvelService characterCustomMarvelService;
 
-    public CharacterController(CharacterCustomService characterCustomService) {
+    public CharacterController(CharacterCustomService characterCustomService, CharacterCustomMarvelService characterCustomMarvelService) {
         this.characterCustomService = characterCustomService;
+        this.characterCustomMarvelService = characterCustomMarvelService;
     }
 
     @GetMapping("/character/findAllFromMarvelApi")
     public ResponseEntity<List<CharacterMarvelDTO>> findAllFromMarvelApi(Pageable pageable) {
-        Page<CharacterMarvelDTO> page = characterCustomService.findAllOfMarvelApi(pageable);
+        Page<CharacterMarvelDTO> page = characterCustomMarvelService.findAllOfMarvelApi(pageable);
         return ResponseEntity.ok(page.getContent());
     }
 
@@ -40,7 +43,7 @@ public class CharacterController {
 
     @GetMapping("/character/findByName")
     public ResponseEntity<CharacterMarvelDTO> findByName(@RequestParam(name = "name") String name) {
-        return ResponseEntity.ok(characterCustomService.findByName(name));
+        return ResponseEntity.ok(characterCustomMarvelService.findByName(name));
     }
 
     @PostMapping("/character/save")
