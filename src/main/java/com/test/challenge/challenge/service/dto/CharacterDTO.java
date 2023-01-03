@@ -1,5 +1,7 @@
 package com.test.challenge.challenge.service.dto;
 
+import com.test.challenge.challenge.model.User;
+
 public class CharacterDTO {
 
     private Long id;
@@ -8,6 +10,7 @@ public class CharacterDTO {
     private String modified;
     private String thumbnail;
     private String marvelId;
+    private UserDTO userDTO;
 
     public Long getId() {
         return id;
@@ -57,6 +60,14 @@ public class CharacterDTO {
         this.marvelId = marvelId;
     }
 
+    public UserDTO getUserDTO() {
+        return userDTO;
+    }
+
+    public void setUserDTO(UserDTO userDTO) {
+        this.userDTO = userDTO;
+    }
+
     @Override
     public String toString() {
         return "CharacterDTO{" +
@@ -66,6 +77,7 @@ public class CharacterDTO {
                 ", modified='" + modified + '\'' +
                 ", thumbnail='" + thumbnail + '\'' +
                 ", marvelId='" + marvelId + '\'' +
+                ", userDTO=" + userDTO +
                 '}';
     }
 }

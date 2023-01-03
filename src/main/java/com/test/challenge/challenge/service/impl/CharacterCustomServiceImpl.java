@@ -6,6 +6,7 @@ import com.test.challenge.challenge.model.User;
 import com.test.challenge.challenge.service.CharacterCustomService;
 import com.test.challenge.challenge.service.CharacterService;
 import com.test.challenge.challenge.service.dto.CharacterDTO;
+import com.test.challenge.challenge.service.dto.CharacterMarvelDTO;
 import com.test.challenge.challenge.service.dto.UserDTO;
 import com.test.challenge.challenge.service.mapper.CharacterMapper;
 import org.springframework.data.domain.Page;
@@ -32,7 +33,7 @@ public class CharacterCustomServiceImpl implements CharacterCustomService {
     }
 
     @Override
-    public List<CharacterDTO> saveAll(List<Character> characterList, Long userId) {
+    public List<CharacterDTO> saveAll(List<CharacterMarvelDTO> characterList, Long userId) {
 
         if (characterList.size() > 20) {
             throw new BusinessExceptions("MS-403", "No se pueden agregar más de 20 personajes.", HttpStatus.PRECONDITION_FAILED);
@@ -40,15 +41,16 @@ public class CharacterCustomServiceImpl implements CharacterCustomService {
 
         List<CharacterDTO> characterDTOSaved = new ArrayList<>();
 
-        characterList.forEach(character -> {
-            if (!findByMarvelId(character.getId().toString()).isPresent()) {
+        characterList.forEach(characterMarvelDTO -> {
+            if (!findByMarvelId(characterMarvelDTO.getMarvelId()).isPresent()) {
+                Character characterToSaved = characterMapper.marvelDTOToEntity(characterMarvelDTO);
 
                 User user = new User();
                 user.setId(userId);
-                character.setUser(user);
+                characterToSaved.setUser(user);
 
-                characterService.save(character);
-                characterDTOSaved.add(characterMapper.entityToDTO(character));
+                Character characterSaved = characterService.save(characterToSaved);
+                characterDTOSaved.add(characterMapper.entityToDTO(characterSaved));
             }
         });
 

@@ -96,7 +96,7 @@ public class Character extends AbstractAuditingEntity implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Character character = (Character) o;
-        return name.equals(character.name) || marvelId.equals(character.marvelId);
+        return id.equals(character.id) || marvelId.equals(character.marvelId);
     }
 
     @Override

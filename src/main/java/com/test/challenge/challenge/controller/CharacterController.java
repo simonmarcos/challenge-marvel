@@ -47,8 +47,8 @@ public class CharacterController {
     }
 
     @PostMapping("/character/save")
-    public ResponseEntity<List<CharacterDTO>> save(@Valid @RequestBody List<Character> characterList, @RequestParam(name = "userId") Long userId) throws URISyntaxException {
-        List<CharacterDTO> characterDTOResponse = characterCustomService.saveAll(characterList, userId);
+    public ResponseEntity<List<CharacterDTO>> save(@Valid @RequestBody List<CharacterMarvelDTO> characterMarvelDTOList, @RequestParam(name = "userId") Long userId) throws URISyntaxException {
+        List<CharacterDTO> characterDTOResponse = characterCustomService.saveAll(characterMarvelDTOList, userId);
 
         if (characterDTOResponse.size() == 0) {
             throw new BusinessExceptions("MS-405", "Los personajes enviados ya se encuentran en la base de datos.", HttpStatus.BAD_REQUEST);

@@ -2,6 +2,7 @@ package com.test.challenge.challenge.service;
 
 import com.test.challenge.challenge.model.Character;
 import com.test.challenge.challenge.service.dto.CharacterDTO;
+import com.test.challenge.challenge.service.dto.CharacterMarvelDTO;
 import com.test.challenge.challenge.service.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,7 +12,7 @@ import java.util.Optional;
 
 public interface CharacterCustomService {
 
-    List<CharacterDTO> saveAll(List<Character> characterDTOList, Long userId);
+    List<CharacterDTO> saveAll(List<CharacterMarvelDTO> characterDTOList, Long userId);
 
     UserDTO update(CharacterDTO characterDTO);
 
