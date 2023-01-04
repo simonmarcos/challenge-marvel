@@ -1,7 +1,6 @@
 package com.test.challenge.challenge.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.CacheConcurrencyStrategy;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -29,8 +28,7 @@ public class User extends AbstractAuditingEntity implements Serializable {
     private String password;
 
     @OneToMany(mappedBy = "user")
-    @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-    @JsonIgnoreProperties(allowSetters = true)
+    @JsonIgnore
     private Set<Character> characters = new HashSet<>();
 
     public Long getId() {
