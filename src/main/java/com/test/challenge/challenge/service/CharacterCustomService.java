@@ -18,5 +18,7 @@ public interface CharacterCustomService {
 
     Page<CharacterDTO> findAllByUserId(Long userId, Pageable pageable);
 
+    Optional<Character> findByUserAndMarvelID(Long userId, String marvelId);
+
     Optional<Character> findByMarvelId(String marvelId);
 }

@@ -42,7 +42,7 @@ public class CharacterCustomServiceImpl implements CharacterCustomService {
         List<CharacterDTO> characterDTOSaved = new ArrayList<>();
 
         characterList.forEach(characterMarvelDTO -> {
-            if (!findByMarvelId(characterMarvelDTO.getMarvelId()).isPresent()) {
+            if (!findByUserAndMarvelID(userId, characterMarvelDTO.getMarvelId()).isPresent()) {
                 Character characterToSaved = characterMapper.marvelDTOToEntity(characterMarvelDTO);
 
                 User user = new User();
@@ -70,6 +70,11 @@ public class CharacterCustomServiceImpl implements CharacterCustomService {
 
         characters.getContent().forEach(character -> characterDTOList.add(characterMapper.entityToDTO(character)));
         return new PageImpl<>(characterDTOList);
+    }
+
+    @Override
+    public Optional<Character> findByUserAndMarvelID(Long userId, String marvelId) {
+        return characterService.findByUserAndMarvelID(userId, marvelId);
     }
 
     @Override

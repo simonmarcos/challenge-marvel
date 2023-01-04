@@ -19,6 +19,8 @@ public interface CharacterService {
 
     Page<Character> findAllByUserId(Long id, Pageable pageable);
 
+    Optional<Character> findByUserAndMarvelID(Long userId, String marvelId);
+
     Page<Character> findAll(Pageable pageable);
 
     Optional<Character> findByName(String name);

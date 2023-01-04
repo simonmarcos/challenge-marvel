@@ -44,6 +44,11 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    public Optional<Character> findByUserAndMarvelID(Long userId, String marvelId) {
+        return characterRepository.findByUserAndMarvelID(userId, marvelId);
+    }
+
+    @Override
     public Page<Character> findAll(Pageable pageable) {
         return characterRepository.findAll(pageable);
     }
