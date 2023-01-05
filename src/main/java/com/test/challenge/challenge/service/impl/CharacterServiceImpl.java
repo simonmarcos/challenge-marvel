@@ -39,6 +39,11 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
+    public Integer deleteByUserAndMarvelId(Long id, String marvelId) {
+        return characterRepository.deleteByUserAndMarvelId(id, marvelId);
+    }
+
+    @Override
     public Page<Character> findAllByUserId(Long userId, Pageable pageable) {
         return characterRepository.findAllByUserId(userId, pageable);
     }

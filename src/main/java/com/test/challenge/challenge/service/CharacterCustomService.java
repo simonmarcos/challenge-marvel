@@ -16,6 +16,8 @@ public interface CharacterCustomService {
 
     UserDTO update(CharacterDTO characterDTO);
 
+    boolean deleteByUserAndMarvelId(Long id, String marvelId);
+
     Page<CharacterDTO> findAllByUserId(Long userId, Pageable pageable);
 
     Optional<Character> findByUserAndMarvelID(Long userId, String marvelId);

@@ -63,6 +63,11 @@ public class CharacterCustomServiceImpl implements CharacterCustomService {
     }
 
     @Override
+    public boolean deleteByUserAndMarvelId(Long id, String marvelId) {
+        return characterService.deleteByUserAndMarvelId(id, marvelId) > 0;
+    }
+
+    @Override
     public Page<CharacterDTO> findAllByUserId(Long userId, Pageable pageable) {
         Page<Character> characters = characterService.findAllByUserId(userId, pageable);
 
