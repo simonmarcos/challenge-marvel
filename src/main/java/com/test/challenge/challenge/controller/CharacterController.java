@@ -1,7 +1,6 @@
 package com.test.challenge.challenge.controller;
 
 import com.test.challenge.challenge.exception.BusinessExceptions;
-import com.test.challenge.challenge.model.Character;
 import com.test.challenge.challenge.service.CharacterCustomMarvelService;
 import com.test.challenge.challenge.service.CharacterCustomService;
 import com.test.challenge.challenge.service.dto.CharacterDTO;
@@ -55,5 +54,16 @@ public class CharacterController {
         }
 
         return ResponseEntity.created(new URI("/api/character/save")).body(characterDTOResponse);
+    }
+
+    @DeleteMapping("/character/{id}/delete")
+    public ResponseEntity delete(@PathVariable(name = "id") Long id, @RequestParam(name = "marvelId") String marvelId) {
+        boolean isDeleted = characterCustomService.deleteByUserAndMarvelId(id, marvelId);
+        if (isDeleted) {
+            return ResponseEntity.noContent().build();
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 }
