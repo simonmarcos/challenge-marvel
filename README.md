@@ -13,6 +13,8 @@ and authorized using JSON Web Tokens (JWT).
 # Running the application
 
 * Clone this repository.
+    - You can do it by SSH:  git@github.com:simonmarcos/challenge-marvel.git
+
 * Create a file called application.properties in the src/main/resources folder and set the following properties:
     - marvel.api.key: Your Marvel API key.
     - marvel.api.secret: Your Marvel API secret.
@@ -54,6 +56,12 @@ and authorized using JSON Web Tokens (JWT).
 
 You can access the Swagger documentation at  http://localhost:8080/swagger-ui/index.html#/ where to access and view the
 documentation you need to have created a user and log in
+
+# Further improvements
+
+* Add more endpoints to search for characters by name, powers, etc.
+* Add tests to ensure the stability and reliability of the API.
+* Create an exception dictionary to centralize the handling of exceptions in the application.
 
 # Technologies used
 
