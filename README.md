@@ -21,6 +21,7 @@ and authorized using JSON Web Tokens (JWT).
     - spring.datasource.url: The URL of the database where you want to store the characters of the registered users.
     - spring.datasource.username: The username for the database.
     - spring.datasource.password: The password for the database.
+* Create a database in postgresql with the same name as specified in the applicaction.properties file.
 * Run the following command to start the application:
     - Copy code: mvn spring-boot:run
 * The API will be available at http://localhost:8080.
