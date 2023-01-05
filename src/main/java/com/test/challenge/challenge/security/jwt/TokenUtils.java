@@ -2,20 +2,25 @@ package com.test.challenge.challenge.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+@Service
 public class TokenUtils {
 
-    private final static String ACCESS_TOKEN_SECRET = "29ee1086e919e5f142bf1312f80a2c67253de4d6f41cdfab715c34acbcb1d8e7";
-    private final static Long ACCESS_TOKEN_VALIDITY_SECOND = 3600L;
+    @Value("${api.access.token.secret}")
+    private String ACCESS_TOKEN_SECRET;
+    @Value("${api.access.token.validity.second}")
+    private Long ACCESS_TOKEN_VALIDITY_SECOND;
 
-    public static String createToken(String name, String email) {
-        Date expirationDate = new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALIDITY_SECOND * 1000);
+    public String createToken(String name, String email) {
+        Date expirationDate = new Date(System.currentTimeMillis() + this.ACCESS_TOKEN_VALIDITY_SECOND * 24);
 
         Map<String, Object> payload = new HashMap<>();
         payload.put("name", name);
@@ -28,9 +33,9 @@ public class TokenUtils {
                 .compact();
     }
 
-    public static UsernamePasswordAuthenticationToken getAuthentication(String token) throws JwtException {
+    public UsernamePasswordAuthenticationToken getAuthentication(String token) throws JwtException {
         Claims claims = Jwts.parserBuilder()
-                .setSigningKey(Keys.hmacShaKeyFor(ACCESS_TOKEN_SECRET.getBytes()))
+                .setSigningKey(Keys.hmacShaKeyFor(this.ACCESS_TOKEN_SECRET.getBytes()))
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
