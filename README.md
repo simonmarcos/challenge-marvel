@@ -55,6 +55,12 @@ and authorized using JSON Web Tokens (JWT).
 You can access the Swagger documentation at  http://localhost:8080/swagger-ui/index.html#/ where to access and view the
 documentation you need to have created a user and log in
 
+# Further improvements
+
+* Add more endpoints to search for characters by name, powers, etc.
+* Add tests to ensure the stability and reliability of the API.
+* Create an exception dictionary to centralize the handling of exceptions in the application.
+
 # Technologies used
 
 * Spring Boot JPA (Java Persistence API)
