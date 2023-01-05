@@ -13,6 +13,8 @@ and authorized using JSON Web Tokens (JWT).
 # Running the application
 
 * Clone this repository.
+    - You can do it by SSH:  git@github.com:simonmarcos/challenge-marvel.git
+
 * Create a file called application.properties in the src/main/resources folder and set the following properties:
     - marvel.api.key: Your Marvel API key.
     - marvel.api.secret: Your Marvel API secret.
