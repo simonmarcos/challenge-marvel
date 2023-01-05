@@ -1,11 +1,12 @@
 # Marvel Characters API
 
 This is a Spring Boot API that consumes the public Marvel API and provides paginated access to Marvel characters. It
-also has its own database to store the characters of each registered user of the application.
+also has its own database to store the characters of each registered user of the application. The API is authenticated
+and authorized using JSON Web Tokens (JWT).
 
 # Prerequisites
 
-* Java 8 or higher
+* Java 11 or higher
 * Maven 3.8.1 or higher
 * A Marvel API key (https://developer.marvel.com/)
 
