@@ -50,6 +50,11 @@ and authorized using JSON Web Tokens (JWT).
 * /character/{id}/delete: Adds the character with the specified ID to the list of favorites of the logged in user.
   @Delete
 
+# Swagger
+
+You can access the Swagger documentation at  http://localhost:8080/swagger-ui/index.html#/ where to access and view the
+documentation you need to have created a user and log in
+
 # Technologies used
 
 * Spring Boot JPA (Java Persistence API)
