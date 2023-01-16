@@ -29,16 +29,6 @@ public class CharacterServiceImpl implements CharacterService {
     }
 
     @Override
-    public List<Character> saveAll(List<Character> characterDTOList) {
-        return characterRepository.saveAll(characterDTOList);
-    }
-
-    @Override
-    public UserDTO update(CharacterDTO characterDTO) {
-        return null;
-    }
-
-    @Override
     public Integer deleteByUserAndMarvelId(Long id, String marvelId) {
         return characterRepository.deleteByUserAndMarvelId(id, marvelId);
     }
@@ -51,11 +41,6 @@ public class CharacterServiceImpl implements CharacterService {
     @Override
     public Optional<Character> findByUserAndMarvelID(Long userId, String marvelId) {
         return characterRepository.findByUserAndMarvelID(userId, marvelId);
-    }
-
-    @Override
-    public Page<Character> findAll(Pageable pageable) {
-        return characterRepository.findAll(pageable);
     }
 
     @Override

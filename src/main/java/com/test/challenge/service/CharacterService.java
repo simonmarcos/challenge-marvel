@@ -13,17 +13,11 @@ public interface CharacterService {
 
     Character save(Character character);
 
-    List<Character> saveAll(List<Character> characterDTOList);
-
-    UserDTO update(CharacterDTO characterDTO);
-
     Integer deleteByUserAndMarvelId(Long id, String marvelId);
 
     Page<Character> findAllByUserId(Long id, Pageable pageable);
 
     Optional<Character> findByUserAndMarvelID(Long userId, String marvelId);
-
-    Page<Character> findAll(Pageable pageable);
 
     Optional<Character> findByName(String name);
 
