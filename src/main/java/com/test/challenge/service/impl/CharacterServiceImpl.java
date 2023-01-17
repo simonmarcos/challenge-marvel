@@ -3,8 +3,6 @@ package com.test.challenge.service.impl;
 import com.test.challenge.model.Character;
 import com.test.challenge.repository.CharacterRepository;
 import com.test.challenge.service.CharacterService;
-import com.test.challenge.service.dto.CharacterDTO;
-import com.test.challenge.service.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -26,6 +24,11 @@ public class CharacterServiceImpl implements CharacterService {
     @Override
     public Character save(Character character) {
         return characterRepository.save(character);
+    }
+
+    @Override
+    public List<Character> saveAll(List<Character> characters) {
+        return characterRepository.saveAll(characters);
     }
 
     @Override

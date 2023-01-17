@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -39,22 +40,9 @@ public class CharacterCustomServiceImpl implements CharacterCustomService {
             throw new BusinessExceptions("MS-403", "No se pueden agregar más de 20 personajes.", HttpStatus.PRECONDITION_FAILED);
         }
 
-        List<CharacterDTO> characterDTOSaved = new ArrayList<>();
+        List<Character> characterListToSave = characterService.saveAll(validateCharacterListToSave(characterList, userId));
 
-        characterList.forEach(characterMarvelDTO -> {
-            if (!findByUserAndMarvelID(userId, characterMarvelDTO.getMarvelId()).isPresent()) {
-                Character characterToSaved = characterMapper.marvelDTOToEntity(characterMarvelDTO);
-
-                User user = new User();
-                user.setId(userId);
-                characterToSaved.setUser(user);
-
-                Character characterSaved = characterService.save(characterToSaved);
-                characterDTOSaved.add(characterMapper.entityToDTO(characterSaved));
-            }
-        });
-
-        return characterDTOSaved;
+        return characterListToSave.stream().map(characterMapper::entityToDTO).collect(Collectors.toList());
     }
 
     @Override
@@ -77,14 +65,22 @@ public class CharacterCustomServiceImpl implements CharacterCustomService {
         return new PageImpl<>(characterDTOList);
     }
 
-    @Override
-    public Optional<Character> findByUserAndMarvelID(Long userId, String marvelId) {
-        return characterService.findByUserAndMarvelID(userId, marvelId);
-    }
+    private List<Character> validateCharacterListToSave(List<CharacterMarvelDTO> characterListToSave, Long userId) {
+        List<Character> listCharacterToSave = new ArrayList<>();
 
-    @Override
-    public Optional<Character> findByMarvelId(String marvelId) {
-        return characterService.findByMarvelId(marvelId);
-    }
+        characterListToSave.forEach(characterMarvelDTO -> {
+            Optional<Character> characterOptional = characterService.findByUserAndMarvelID(userId, characterMarvelDTO.getMarvelId());
+            if (!characterOptional.isPresent()) {
+                User user = new User();
+                user.setId(userId);
 
+                Character characterToSave = characterMapper.marvelDTOToEntity(characterMarvelDTO);
+                characterToSave.setUser(user);
+
+                listCharacterToSave.add(characterToSave);
+            }
+        });
+
+        return listCharacterToSave;
+    }
 }

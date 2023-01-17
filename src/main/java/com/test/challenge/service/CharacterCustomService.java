@@ -1,6 +1,5 @@
 package com.test.challenge.service;
 
-import com.test.challenge.model.Character;
 import com.test.challenge.service.dto.CharacterDTO;
 import com.test.challenge.service.dto.CharacterMarvelDTO;
 import com.test.challenge.service.dto.UserDTO;
@@ -8,7 +7,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CharacterCustomService {
 
@@ -20,7 +18,4 @@ public interface CharacterCustomService {
 
     Page<CharacterDTO> findAllByUserId(Long userId, Pageable pageable);
 
-    Optional<Character> findByUserAndMarvelID(Long userId, String marvelId);
-
-    Optional<Character> findByMarvelId(String marvelId);
 }

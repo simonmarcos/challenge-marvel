@@ -1,8 +1,6 @@
 package com.test.challenge.service;
 
 import com.test.challenge.model.Character;
-import com.test.challenge.service.dto.CharacterDTO;
-import com.test.challenge.service.dto.UserDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -12,6 +10,8 @@ import java.util.Optional;
 public interface CharacterService {
 
     Character save(Character character);
+
+    List<Character> saveAll(List<Character> characters);
 
     Integer deleteByUserAndMarvelId(Long id, String marvelId);
 
